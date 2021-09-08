@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parallel_sortings", "WindowsFormsApp1\Parallel_sortings.csproj", "{40FA388D-FAFC-44D0-8AC3-1F8DBCE8966C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{CAA7042D-F23F-4C67-BB69-77A7C409E8AD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{40FA388D-FAFC-44D0-8AC3-1F8DBCE8966C} = {40FA388D-FAFC-44D0-8AC3-1F8DBCE8966C}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40FA388D-FAFC-44D0-8AC3-1F8DBCE8966C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40FA388D-FAFC-44D0-8AC3-1F8DBCE8966C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40FA388D-FAFC-44D0-8AC3-1F8DBCE8966C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40FA388D-FAFC-44D0-8AC3-1F8DBCE8966C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAA7042D-F23F-4C67-BB69-77A7C409E8AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAA7042D-F23F-4C67-BB69-77A7C409E8AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAA7042D-F23F-4C67-BB69-77A7C409E8AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAA7042D-F23F-4C67-BB69-77A7C409E8AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CA88AF0-AE6A-41FC-A4A6-7B82C847ABEC}
+	EndGlobalSection
+EndGlobal
