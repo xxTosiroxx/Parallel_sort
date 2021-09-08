@@ -39,11 +39,11 @@ namespace Parallel_sortings
             }
         }
 
-        public void quickSort(int[] arr)
+        public void quickSort()
         {
             numberOfShifts = 0;
             numberOfComparsions = 0;
-            quick(arr, 0, arr.Length - 1);
+            quick(array, 0, array.Length - 1);
         }
         private  void quick(int[] arr, int low, int high)
         {
@@ -79,26 +79,26 @@ namespace Parallel_sortings
             return (i + 1);
         }
 
-        public void shellSort(int[] arr)
+        public void shellSort()
         {
             numberOfComparsions = 0;
             numberOfShifts = 0;
-            int n = arr.Length;
+            int n = array.Length;
 
             for (int gap = n / 2; gap > 0; gap /= 2)
             {
                 for (int i = gap; i < n; i++)
                 {
-                    int temp = arr[i];
+                    int temp = array[i];
                     int j;
-                    for ( j = i; j >= gap && arr[j - gap] > temp; j -= gap)
+                    for ( j = i; j >= gap && array[j - gap] > temp; j -= gap)
                     {
-                        arr[j] = arr[j - gap];
+                        array[j] = array[j - gap];
                         numberOfShifts++;
                         numberOfComparsions++;
                     }
 
-                    arr[j] = temp;
+                    array[j] = temp;
                     numberOfShifts++;
                 }
             }
@@ -107,7 +107,7 @@ namespace Parallel_sortings
 
 
 
-        public void Swap(ref int firstNumber,ref int secondNumber)
+        private void Swap(ref int firstNumber,ref int secondNumber)
         {
             int temp = firstNumber;
             firstNumber = secondNumber;

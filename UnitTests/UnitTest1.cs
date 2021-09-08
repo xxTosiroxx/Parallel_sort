@@ -11,28 +11,47 @@ namespace UnitTests
         }
 
         [Test]
-        public void Test1()
+        public void BubbleSortTest()
         {
             
             Sortings sort1 = new Sortings(new int[] { 4, 5, 2, 3, 66, 34, 2, 6 });
-            int a = 5;
-            int b = 10;
-            sort1.Swap(ref a,ref b);
-            Assert.AreEqual(10, a);
-            Assert.AreEqual(5, b);
+            int[] sortedArray = new int[] {2, 2, 3, 4, 5, 6, 34, 66 };
+            sort1.BubbleSort();
+            for(int i = 0; i < sortedArray.Length; i++)
+            {
+                Assert.AreEqual(sortedArray[i], sort1.array[i]);
+
+            }
             Assert.Pass();
         }
 
-
-        public void Test2()
+        [Test]
+        public void QuickSortTest()
         {
 
             Sortings sort1 = new Sortings(new int[] { 4, 5, 2, 3, 66, 34, 2, 6 });
-            int a = 5;
-            int b = 10;
-            sort1.Swap(ref a, ref b);
-            Assert.AreEqual(10, a);
-            Assert.AreEqual(5, b);
+            int[] sortedArray = new int[] { 2, 2, 3, 4, 5, 6, 34, 66 };
+            sort1.quickSort();
+            for (int i = 0; i < sortedArray.Length; i++)
+            {
+                Assert.AreEqual(sortedArray[i], sort1.array[i]);
+
+            }
+            Assert.Pass();
+        }
+
+        [Test]
+        public void ShellSortTest()
+        {
+
+            Sortings sort1 = new Sortings(new int[] { 4, 5, 2, 3, 66, 34, 2, 6 });
+            int[] sortedArray = new int[] { 2, 2, 3, 4, 5, 6, 34, 66 };
+            sort1.shellSort();
+            for (int i = 0; i < sortedArray.Length; i++)
+            {
+                Assert.AreEqual(sortedArray[i], sort1.array[i]);
+
+            }
             Assert.Pass();
         }
     }
