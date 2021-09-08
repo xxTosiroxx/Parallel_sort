@@ -90,8 +90,8 @@ namespace Parallel_sortings
                 for (int i = gap; i < n; i++)
                 {
                     int temp = arr[i];
-
-                    for (int j = i; j >= gap && arr[j - gap] > temp; j -= gap)
+                    int j;
+                    for ( j = i; j >= gap && arr[j - gap] > temp; j -= gap)
                     {
                         arr[j] = arr[j - gap];
                         numberOfShifts++;
