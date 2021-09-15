@@ -45,7 +45,7 @@ namespace Parallel_sortings
             numberOfComparsions = 0;
             quick(array, 0, array.Length - 1);
         }
-        private  void quick(int[] arr, int low, int high)
+        private void quick(int[] arr, int low, int high)
         {
             if (low < high)
             {
@@ -55,7 +55,7 @@ namespace Parallel_sortings
             }
         }
 
-        private  int partition(int[] arr, int low, int high)
+        private int partition(int[] arr, int low, int high)
         {
             int pivot = arr[high];
             int i = (low - 1);
