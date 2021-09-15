@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,25 +18,41 @@ namespace Parallel_sortings
             InitializeComponent();
         }
         private List<int[]> arrList;
+        private List<Sortings> SortingsList;
 
         private void button1_Click(object sender, EventArgs e)
         {
             arrList = new List<int[]>();
             
 
-            int[] arr = createRandomArrayWithUserInput();
+            int[] arr = createRandomArrayWithUsersInputs();
 
             makeUnsortArrays(arr);
 
-            Sort.bubbleSort(arrList[1]);
-            Sort.quickSort(arrList[2]); // make function
-            Sort.shellSort(arrList[3]);
-
-            printArr(arrList[0], textBox7);
-            printArr(arrList[1], textBox4);
-            printArr(arrList[2], textBox5); // make function
-            printArr(arrList[3], textBox6);
+            sortArrays(arrList);
         }
+
+        private int[] createRandomArrayWithUsersInputs()
+        {
+            int n, left, right;
+
+            readUserInputs(out n, out left, out right);
+
+
+            return createArray(n, left, right);
+        }
+        private void readUserInputs(out int n, out int left, out int right)
+        {
+            bool result;
+
+            result = int.TryParse(textBox1.Text, out n);
+            if (!result) throw new Exception();
+            result = int.TryParse(textBox2.Text, out left);
+            if (!result) throw new Exception();
+            result = int.TryParse(textBox3.Text, out right);
+            if (!result) throw new Exception();
+        }
+
 
         public void makeUnsortArrays(int[] array)
         {
@@ -44,33 +61,90 @@ namespace Parallel_sortings
             arrList.Add(makeCopy(array));  
             arrList.Add(makeCopy(array));
         }
-        private int[] createRandomArrayWithUserInput() 
+        public void sortArrays(List<int[]> listOfUnsortedArrays)
         {
-            int n, left, right; 
-
-            readUserInputs(out n,out left,out right);
-            
-           
-            return createArray(n,left,right);
+            SortingsList = new List<Sortings>();
+            fillSortings(SortingsList,listOfUnsortedArrays);
+            sortAllArrays();
         }
-        private void readUserInputs(out int n, out int left, out int right)
+        private void fillSortings(List<Sortings> listToFill, List<int[]> listOfUnsortedArrays)
         {
-            bool result;
 
-            result = int.TryParse(textBox1.Text, out n);
-            if (!result) throw new Exception();
-            result = int.TryParse(textBox2.Text, out left); 
-            if (!result) throw new Exception();
-            result = int.TryParse(textBox3.Text, out right);
-            if (!result) throw new Exception();
+            for(int i = 1; i < listOfUnsortedArrays.Count; i++)
+            {
+                listToFill.Add(new Sortings(listOfUnsortedArrays[i]));
+            }
+
         }
+        private void sortAllArrays()
+        {
+            chooseSortingsForArrays();
+            runTreadsWithSortings();
+
+        }
+        public void chooseSortingsForArrays()
+        {
+            for (int i = 0; i < SortingsList.Count; i++)
+            {
+                if (i % 3 == 0)
+                {
+                    SortingsList[i].Name = SortingsNames.BubbleSort;
+                    continue;
+                }
+                if (i % 3 == 1)
+                {
+                    SortingsList[i].Name = SortingsNames.QuickSort;
+                    continue;
+                }
+                if (i % 3 == 2)
+                {
+                    SortingsList[i].Name = SortingsNames.ShellSort;
+                    continue;
+                }
+            }
+        }
+        private void runTreadsWithSortings()
+        {
+            foreach (Sortings sortingManager in SortingsList)
+            {
+                createTreadWithFeedback(sortingManager);
+            }
+        }
+        private void createTreadWithFeedback(Sortings sortingManager)
+        {
+            Thread tr = new Thread(sortWithFeedback);
+         
+            tr.Start(sortingManager);
+        }
+        private void sortWithFeedback(object sortObject)
+        {
+            Sortings sortingManager = (Sortings)sortObject;
+
+            sortingManager.sort();
+
+            feedback(sortingManager);
+
+        }
+        
+        private void feedback(Sortings sortingManager)
+        {
+            MessageBox.Show(
+                "Сортировка " + sortingManager.Name + " выполнена." +
+                "\nКоличество перестановок: " + sortingManager.numberOfShifts.ToString() +
+                "\nКоличество сравнений: " + sortingManager.numberOfComparsions.ToString() +
+                "\nВремя выполнения: " + sortingManager.time.ToString() +
+                "\nКоличество тиков процессора: " + sortingManager.numberOfTicks.ToString()
+
+                ); 
+        }
+     
         private int[] createArray(int length,int left,int right)
         {
             Random rng = new Random();
             int[] arr = new int[length];
             for (int i = 0; i < arr.Length; i++)
             {
-                arr[i] = rng.Next(left, right); // make function
+                arr[i] = rng.Next(left, right); 
             }
             return arr;
 
