@@ -20,7 +20,6 @@ namespace UnitTests
             for(int i = 0; i < sortedArray.Length; i++)
             {
                 Assert.AreEqual(sortedArray[i], sort1.array[i]);
-
             }
             Assert.Pass();
         }
@@ -35,7 +34,6 @@ namespace UnitTests
             for (int i = 0; i < sortedArray.Length; i++)
             {
                 Assert.AreEqual(sortedArray[i], sort1.array[i]);
-
             }
             Assert.Pass();
         }

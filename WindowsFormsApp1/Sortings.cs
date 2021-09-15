@@ -15,8 +15,6 @@ namespace Parallel_sortings
         public TimeSpan time;
         public SortingsNames Name;
 
-        
-
         public Sortings(int[] array)
         {
             this.array = array;
@@ -25,6 +23,7 @@ namespace Parallel_sortings
         {
             numberOfTicks = DateTime.Now.Ticks;
             DateTime start = DateTime.Now;
+
             chooseSort();
             numberOfTicks = DateTime.Now.Ticks - numberOfTicks;
             time = DateTime.Now - start;
@@ -55,20 +54,29 @@ namespace Parallel_sortings
             numberOfShifts = 0;
             numberOfComparsions = 0;
             Name = SortingsNames.BubbleSort;
+            bubble(); 
+        }
+
+        private void bubble()
+        {
             int temp;
+            int count = 0;
             for (int i = 0; i < array.Length - 1; i++)
             {
+                count = 0;
                 for (int j = 0; j < array.Length - i - 1; j++)
-                {   
+                {
                     if (array[j] > array[j + 1])
                     {
                         temp = array[j];
                         array[j] = array[j + 1];
                         array[j + 1] = temp;
                         numberOfShifts++;
+                        count++;
                     }
                     numberOfComparsions++;
                 }
+                if (count == 0) return;
             }
         }
 
@@ -117,17 +125,19 @@ namespace Parallel_sortings
         {
             numberOfComparsions = 0;
             numberOfShifts = 0;
-            int n = array.Length;
-
             Name = SortingsNames.ShellSort;
-
+            shell();
+        }
+        private void shell()
+        {
+            int n = array.Length;
             for (int gap = n / 2; gap > 0; gap /= 2)
             {
                 for (int i = gap; i < n; i++)
                 {
                     int temp = array[i];
                     int j;
-                    for ( j = i; j >= gap && array[j - gap] > temp; j -= gap)
+                    for (j = i; j >= gap && array[j - gap] > temp; j -= gap)
                     {
                         array[j] = array[j - gap];
                         numberOfShifts++;
