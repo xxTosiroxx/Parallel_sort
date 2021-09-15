@@ -11,8 +11,10 @@ namespace Parallel_sortings
         public int[] array;
         public int numberOfShifts;
         public int numberOfComparsions;
-        public DateTime time;
+        public long numberOfTicks;
+        public TimeSpan time;
         public SortingsNames Name;
+
         
 
         public Sortings(int[] array)
@@ -20,6 +22,15 @@ namespace Parallel_sortings
             this.array = array;
         }
         public void sort()
+        {
+            numberOfTicks = DateTime.Now.Ticks;
+            DateTime start = DateTime.Now;
+            chooseSort();
+            numberOfTicks = DateTime.Now.Ticks - numberOfTicks;
+            time = DateTime.Now - start;
+            
+        }
+        private void chooseSort()
         {
             switch (Name)
             {
@@ -36,6 +47,7 @@ namespace Parallel_sortings
                     quickSort();
                     break;
             }
+
         }
 
         public void bubbleSort() 
