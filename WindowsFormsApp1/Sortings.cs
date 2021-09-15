@@ -12,16 +12,37 @@ namespace Parallel_sortings
         public int numberOfShifts;
         public int numberOfComparsions;
         public DateTime time;
+        public SortingsNames Name;
+        
 
         public Sortings(int[] array)
         {
             this.array = array;
         }
+        public void sort()
+        {
+            switch (Name)
+            {
+                case SortingsNames.BubbleSort:
+                    bubbleSort();
+                    break;
+                case SortingsNames.QuickSort:
+                    quickSort();
+                    break;
+                case SortingsNames.ShellSort:
+                    shellSort();
+                    break;
+                default:
+                    quickSort();
+                    break;
+            }
+        }
 
-        public void BubbleSort() 
+        public void bubbleSort() 
         {
             numberOfShifts = 0;
             numberOfComparsions = 0;
+            Name = SortingsNames.BubbleSort;
             int temp;
             for (int i = 0; i < array.Length - 1; i++)
             {
@@ -43,6 +64,7 @@ namespace Parallel_sortings
         {
             numberOfShifts = 0;
             numberOfComparsions = 0;
+            Name = SortingsNames.QuickSort;
             quick(array, 0, array.Length - 1);
         }
         private void quick(int[] arr, int low, int high)
@@ -85,6 +107,8 @@ namespace Parallel_sortings
             numberOfShifts = 0;
             int n = array.Length;
 
+            Name = SortingsNames.ShellSort;
+
             for (int gap = n / 2; gap > 0; gap /= 2)
             {
                 for (int i = gap; i < n; i++)
@@ -113,5 +137,11 @@ namespace Parallel_sortings
             firstNumber = secondNumber;
             secondNumber = temp;
         }
+    }
+    public enum SortingsNames
+    {
+        BubbleSort,
+        QuickSort,
+        ShellSort
     }
 }
