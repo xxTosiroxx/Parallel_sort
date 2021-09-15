@@ -29,14 +29,7 @@ namespace Parallel_sortings
 
             makeUnsortArrays(arr);
 
-            Sort.bubbleSort(arrList[1]);
-            Sort.quickSort(arrList[2]); 
-            Sort.shellSort(arrList[3]);
-
-            printArr(arrList[0], textBox7);
-            printArr(arrList[1], textBox4);
-            printArr(arrList[2], textBox5); 
-            printArr(arrList[3], textBox6);
+            sortArrays(arrList);
         }
 
         private int[] createRandomArrayWithUsersInputs()
@@ -77,11 +70,11 @@ namespace Parallel_sortings
         private void fillSortings(List<Sortings> listToFill, List<int[]> listOfUnsortedArrays)
         {
 
-            foreach(int[] i in listOfUnsortedArrays)
+            for(int i = 1; i < listOfUnsortedArrays.Count; i++)
             {
-                listToFill.Add(new Sortings(i));
-                
+                listToFill.Add(new Sortings(listOfUnsortedArrays[i]));
             }
+
         }
         private void sortAllArrays()
         {
@@ -127,12 +120,22 @@ namespace Parallel_sortings
         {
             Sortings sortingManager = (Sortings)sortObject;
 
+            sortingManager.sort();
+
             feedback(sortingManager);
 
         }
+        
         private void feedback(Sortings sortingManager)
         {
-            MessageBox.Show("Сортировка " + sortingManager.Name + " выполнена"); 
+            MessageBox.Show(
+                "Сортировка " + sortingManager.Name + " выполнена." +
+                "\nКоличество перестановок: " + sortingManager.numberOfShifts.ToString() +
+                "\nКоличество сравнений: " + sortingManager.numberOfComparsions.ToString() +
+                "\nВремя выполнения: " + sortingManager.time.ToString() +
+                "\nКоличество тиков процессора: " + sortingManager.numberOfTicks.ToString()
+
+                ); 
         }
      
         private int[] createArray(int length,int left,int right)
