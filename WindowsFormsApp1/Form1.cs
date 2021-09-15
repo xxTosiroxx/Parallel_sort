@@ -29,7 +29,6 @@ namespace Parallel_sortings
             makeUnsortArrays(arr);
             sortArrays(arrList);
         }
-
         private int[] createRandomArrayWithUsersInputs()
         {
             int n, left, right;
@@ -48,7 +47,6 @@ namespace Parallel_sortings
             result = int.TryParse(textBox3.Text, out right);
             if (!result) throw new Exception();
         }
-
         private int[] createArray(int length, int left, int right)
         {
             Random rng = new Random();
@@ -60,7 +58,6 @@ namespace Parallel_sortings
             }
             return arr;
         }
-
         public void makeUnsortArrays(int[] array)
         {
             arrList.Add(array);
@@ -68,7 +65,6 @@ namespace Parallel_sortings
             arrList.Add(makeCopy(array));  
             arrList.Add(makeCopy(array));
         }
-
         private int[] makeCopy(int[] array)
         {
             int[] newArray = new int[array.Length];
@@ -78,14 +74,12 @@ namespace Parallel_sortings
             }
             return newArray;
         }
-
         public void sortArrays(List<int[]> listOfUnsortedArrays)
         {
             SortingsList = new List<Sortings>();
             fillSortings(SortingsList,listOfUnsortedArrays);
             sortAllArrays();
         }
-
         private void fillSortings(List<Sortings> listToFill, List<int[]> listOfUnsortedArrays)
         {
             for(int i = 1; i < listOfUnsortedArrays.Count; i++)
@@ -93,7 +87,6 @@ namespace Parallel_sortings
                 listToFill.Add(new Sortings(listOfUnsortedArrays[i]));
             }
         }
-
         private void sortAllArrays()
         {
             chooseSortingsForArrays();
@@ -141,7 +134,6 @@ namespace Parallel_sortings
             sortingManager.sort();
             feedback(sortingManager);
         }
-        
         private void feedback(Sortings sortingManager)
         {
             MessageBox.Show(
@@ -152,9 +144,6 @@ namespace Parallel_sortings
                 "\nКоличество тиков процессора: " + sortingManager.numberOfTicks.ToString()
                 ); 
         }
-     
- 
-
         private void printArr(int[] arr,TextBox tb)
         {
             for(int i = 0; i < arr.Length; i++)
@@ -162,8 +151,6 @@ namespace Parallel_sortings
                 tb.Text += arr[i].ToString() + " ";
             }
         }
-
-      
     }
 }
 
