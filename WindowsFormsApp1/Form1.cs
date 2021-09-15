@@ -17,18 +17,16 @@ namespace Parallel_sortings
         {
             InitializeComponent();
         }
+
         private List<int[]> arrList;
         private List<Sortings> SortingsList;
 
         private void button1_Click(object sender, EventArgs e)
         {
             arrList = new List<int[]>();
-            
 
             int[] arr = createRandomArrayWithUsersInputs();
-
             makeUnsortArrays(arr);
-
             sortArrays(arrList);
         }
 
@@ -37,8 +35,6 @@ namespace Parallel_sortings
             int n, left, right;
 
             readUserInputs(out n, out left, out right);
-
-
             return createArray(n, left, right);
         }
         private void readUserInputs(out int n, out int left, out int right)
@@ -53,6 +49,17 @@ namespace Parallel_sortings
             if (!result) throw new Exception();
         }
 
+        private int[] createArray(int length, int left, int right)
+        {
+            Random rng = new Random();
+            int[] arr = new int[length];
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = rng.Next(left, right);
+            }
+            return arr;
+        }
 
         public void makeUnsortArrays(int[] array)
         {
@@ -61,21 +68,32 @@ namespace Parallel_sortings
             arrList.Add(makeCopy(array));  
             arrList.Add(makeCopy(array));
         }
+
+        private int[] makeCopy(int[] array)
+        {
+            int[] newArray = new int[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                newArray[i] = array[i];
+            }
+            return newArray;
+        }
+
         public void sortArrays(List<int[]> listOfUnsortedArrays)
         {
             SortingsList = new List<Sortings>();
             fillSortings(SortingsList,listOfUnsortedArrays);
             sortAllArrays();
         }
+
         private void fillSortings(List<Sortings> listToFill, List<int[]> listOfUnsortedArrays)
         {
-
             for(int i = 1; i < listOfUnsortedArrays.Count; i++)
             {
                 listToFill.Add(new Sortings(listOfUnsortedArrays[i]));
             }
-
         }
+
         private void sortAllArrays()
         {
             chooseSortingsForArrays();
@@ -113,7 +131,7 @@ namespace Parallel_sortings
         private void createTreadWithFeedback(Sortings sortingManager)
         {
             Thread tr = new Thread(sortWithFeedback);
-         
+
             tr.Start(sortingManager);
         }
         private void sortWithFeedback(object sortObject)
@@ -121,9 +139,7 @@ namespace Parallel_sortings
             Sortings sortingManager = (Sortings)sortObject;
 
             sortingManager.sort();
-
             feedback(sortingManager);
-
         }
         
         private void feedback(Sortings sortingManager)
@@ -134,21 +150,10 @@ namespace Parallel_sortings
                 "\nКоличество сравнений: " + sortingManager.numberOfComparsions.ToString() +
                 "\nВремя выполнения: " + sortingManager.time.ToString() +
                 "\nКоличество тиков процессора: " + sortingManager.numberOfTicks.ToString()
-
                 ); 
         }
      
-        private int[] createArray(int length,int left,int right)
-        {
-            Random rng = new Random();
-            int[] arr = new int[length];
-            for (int i = 0; i < arr.Length; i++)
-            {
-                arr[i] = rng.Next(left, right); 
-            }
-            return arr;
-
-        }
+ 
 
         private void printArr(int[] arr,TextBox tb)
         {
@@ -158,15 +163,7 @@ namespace Parallel_sortings
             }
         }
 
-        private int[] makeCopy(int[] array)
-        {
-            int[] newArray = new int[array.Length];
-            for (int i = 0; i < array.Length; i++)
-            {
-                newArray[i] = array[i];
-            }
-            return newArray;
-        }
+      
     }
 }
 
