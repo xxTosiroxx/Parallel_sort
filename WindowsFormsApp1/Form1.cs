@@ -140,7 +140,7 @@ namespace Parallel_sortings
                 "Сортировка " + sortingManager.Name + " выполнена." +
                 "\nКоличество перестановок: " + sortingManager.numberOfShifts.ToString() +
                 "\nКоличество сравнений: " + sortingManager.numberOfComparsions.ToString() +
-                "\nВремя выполнения: " + sortingManager.time.ToString() +
+                "\nВремя выполнения в миллисекундах: " + sortingManager.time.TotalMilliseconds.ToString() +
                 "\nКоличество тиков процессора: " + sortingManager.numberOfTicks.ToString()
                 ); 
         }
